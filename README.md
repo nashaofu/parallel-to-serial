@@ -1,2 +1,2 @@
 # parallel-to-serial
-并行任务转换为串行任务
+Parallel task based on Promise converted to serial task
