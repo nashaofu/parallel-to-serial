@@ -4,16 +4,16 @@
  * @param {Array} items 任务数据
  * @param {Function} handle 任务处理函数
  * @param {Number} length 切片长度
- * @return {Array} 按切片执行结果
+ * @return {Promise<Array>} Promise对象按切片执行结果
  */
-export = function(
+export = function (
   items: any[],
   handle: (arg: any) => any,
   length: number = 1
 ): Promise<any[]> {
   let i: number = 0
   const reslut: any = []
-  async function next() {
+  async function next () {
     const slice: any = items.slice(i, i + length)
     i += length
     // 如果数据执行完之后就直接返回
