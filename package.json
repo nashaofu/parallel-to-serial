@@ -25,6 +25,9 @@
     "url": "https://github.com/nashaofu/parallel-to-serial/issues"
   },
   "homepage": "https://github.com/nashaofu/parallel-to-serial#readme",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "devDependencies": {
     "tslint": "^5.11.0",
     "typescript": "^3.0.1"
