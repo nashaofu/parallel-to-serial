@@ -3,7 +3,7 @@ Parallel task based on Promise converted to serial task
 
 ## examples
 ```js
-const parallelToSerial = require('./lib/index')
+const parallelToSerial = require('parallel-to-serial')
 
 function req(val) {
   return new Promise((resolve, reject) => {
