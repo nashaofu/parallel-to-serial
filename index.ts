@@ -6,19 +6,24 @@
  * @return {Promise<Array>} Promise对象按切片执行结果
  */
 export = function (items: Array<() => Promise<any>>, length: number = 1): Promise<any[]> {
-  let i: number = 0
-  const res: any[] = []
-  async function next () {
-    const slice: any = items.slice(i, i + length)
-    i += length
-    // 如果数据执行完之后就直接返回
-    if (slice.length) {
-      // 执行处理逻辑
-      res.push(...(await Promise.all(slice.map((item: () => Promise<any>) => item()))))
-      // 循环下一个切片
-      await next()
+  return new Promise((resolve, reject) => {
+    const res: any[] = []
+    function next (i: number) {
+      const slice: any = items.slice(i, i + length)
+      i += length
+      // 如果数据执行完之后就直接返回
+      if (slice.length) {
+        // 执行处理逻辑
+        Promise.all(slice.map((item: () => Promise<any>) => item()))
+          .then(value => {
+            res.push(...value)
+            next(i)
+          })
+          .catch((err: any) => reject(err))
+      } else {
+        resolve(res)
+      }
     }
-    return res
-  }
-  return next()
+    next(0)
+  })
 }
